@@ -85,16 +85,6 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
-        /* 漸層標題 */
-        .text-gradient {
-            background: linear-gradient(to right, #111827, #6b7280);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .dark .text-gradient {
-            background: linear-gradient(to right, #ffffff, #a1a1aa);
-        }
-
         /* 頁面切換與彈出視窗動畫 */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
@@ -102,6 +92,15 @@
         }
         .fade-in {
             animation: fadeIn 0.4s ease forwards;
+        }
+
+        /* IG Modal 彈出視窗動畫 */
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .modal-animate {
+            animation: modalFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
     </style>
 </head>
@@ -161,12 +160,17 @@
         
         <!-- Hero Section & 關於我 -->
         <section id="about" class="content-section max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 flex flex-col items-center min-h-[80vh] justify-center">
-            <h1 class="text-5xl md:text-7xl font-extrabold tracking-tighter mb-4 text-gradient text-center">鄧鈺臻</h1>
+            <h1 class="text-5xl md:text-7xl font-extrabold tracking-tighter mb-4 bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-600 dark:from-white dark:to-gray-300 text-center drop-shadow-sm">鄧鈺臻</h1>
             <p class="text-xl md:text-2xl text-gray-500 dark:text-gray-400 mb-12 tracking-widest uppercase">Portfolio</p>
             
             <div class="glass-card rounded-3xl p-8 md:p-12 max-w-4xl w-full grid grid-cols-1 md:grid-cols-3 gap-8 items-center cursor-default">
                 <div class="col-span-1 flex flex-col items-center text-center">
-                    <div class="w-32 h-32 rounded-full bg-gradient-to-tr from-gray-300 to-gray-100 dark:from-gray-700 dark:to-gray-500 mb-4 flex items-center justify-center text-3xl shadow-inner">👩🏻‍💻</div>
+                    <!-- ✨ 您可以在這裡替換成您的個人真實照片 -->
+                    <div class="w-32 h-32 rounded-full bg-gradient-to-tr from-gray-300 to-gray-100 dark:from-gray-700 dark:to-gray-500 mb-4 flex items-center justify-center text-3xl shadow-inner overflow-hidden border-2 border-white/50 dark:border-white/10 relative">
+                        <img src="me.png" alt="鄧鈺臻" class="absolute inset-0 w-full h-full object-cover z-10" onerror="this.style.display='none';">
+                        <!-- 若圖片無法載入，會退回顯示 emoji -->
+                        <span class="relative z-0">👩🏻‍💻</span>
+                    </div>
                     <h2 class="text-2xl font-bold">DENG, YU-ZHEN</h2>
                     <p class="text-sm text-gray-500 dark:text-gray-400 mt-2">元智大學資傳系 設計組</p>
                 </div>
@@ -174,9 +178,9 @@
                     <p>個性內斂，對於周遭的人事物有著細膩的觀察力，也因此培養出良好的同理心，能站在不同角度理解他人的想法與情緒。平時透過聽音樂與閱讀來沉澱自己，在歌詞與旋律中獲得療癒與安定。</p>
                     <p>這些興趣影響了我在設計方面的思考，使我更重視情感傳達與使用者感受，並希望將觀察力與同理心轉化為有溫度、能引起共鳴的作品，讓設計成為溝通與理解的橋樑。</p>
                     <div class="pt-4 border-t border-gray-200 dark:border-white/10 flex flex-wrap gap-4 text-sm">
-                        <span class="flex items-center">📧 dyz.940619@gmail.com</span>
-                        <span class="flex items-center">📱 0965036956</span>
-                        <span class="flex items-center">📍 桃園市八德區</span>
+                        <span class="flex items-center">E.  dyz.940619@gmail.com</span>
+                        <span class="flex items-center">T.  0965036956</span>
+                        <span class="flex items-center">L.  桃園市八德區</span>
                     </div>
                     <div class="pt-2 flex gap-2">
                         <span class="px-3 py-1 bg-black/5 dark:bg-white/10 rounded-full text-xs font-medium">Ai</span>
@@ -195,9 +199,10 @@
                 
                 <!-- 專案 1 -->
                 <div onclick="openModal('yzuic')" class="glass-card rounded-2xl overflow-hidden flex flex-col h-full cursor-pointer group">
-                    <div class="h-48 bg-gradient-to-br from-[#4A646C] to-[#2C3E44] flex items-center justify-center relative text-white group-hover:scale-105 transition-transform duration-500">
-                        <span class="text-2xl font-bold opacity-30 absolute">YZUIC</span>
-                        <div class="w-16 h-16 border-2 border-white/50 rounded flex items-center justify-center">2025</div>
+                    <div class="h-48 flex items-center justify-center relative bg-gray-200 dark:bg-gray-800 overflow-hidden">
+                        <img src="boxes.jpg" alt="元智資傳系封面設計" class="absolute inset-0 w-full h-full object-cover z-0 transition-transform duration-500 group-hover:scale-105" onerror="this.style.display='none'">
+                        <!-- 圖片未載入時的備用底色 -->
+                        <div class="absolute inset-0 bg-gradient-to-br from-[#4A646C] to-[#2C3E44] z-[-1]"></div>
                     </div>
                     <div class="p-6 flex-grow flex flex-col relative z-10 bg-white/70 dark:bg-black/40 backdrop-blur-md">
                         <div class="flex justify-between items-start mb-2">
@@ -214,8 +219,9 @@
 
                 <!-- 專案 2 -->
                 <div onclick="openModal('lisa')" class="glass-card rounded-2xl overflow-hidden flex flex-col h-full cursor-pointer group">
-                    <div class="h-48 bg-gradient-to-br from-[#E2B7A8] to-[#996C66] flex items-center justify-center relative text-white group-hover:scale-105 transition-transform duration-500">
-                        <svg class="w-20 h-20 text-white/30" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <div class="h-48 flex items-center justify-center relative bg-gray-200 dark:bg-gray-800 overflow-hidden">
+                        <img src="poster-on-wall-mockup.png" alt="色調分離 (LISA)" class="absolute inset-0 w-full h-full object-cover z-0 transition-transform duration-500 group-hover:scale-105" onerror="this.style.display='none'">
+                        <div class="absolute inset-0 bg-gradient-to-br from-[#E2B7A8] to-[#996C66] z-[-1]"></div>
                     </div>
                     <div class="p-6 flex-grow flex flex-col relative z-10 bg-white/70 dark:bg-black/40 backdrop-blur-md">
                         <div class="flex justify-between items-start mb-2">
@@ -232,10 +238,9 @@
 
                 <!-- 專案 3 -->
                 <div onclick="openModal('ocean')" class="glass-card rounded-2xl overflow-hidden flex flex-col h-full cursor-pointer group">
-                    <div class="h-48 bg-gradient-to-br from-[#7AB0C8] to-[#254E62] flex flex-wrap gap-2 items-center justify-center p-4 group-hover:scale-105 transition-transform duration-500">
-                        <div class="w-12 h-12 rounded-full bg-white/20"></div>
-                        <div class="w-12 h-12 bg-white/20"></div>
-                        <div class="w-0 h-0 border-l-[24px] border-l-transparent border-b-[40px] border-b-white/20 border-r-[24px] border-r-transparent"></div>
+                    <div class="h-48 flex items-center justify-center relative bg-gray-200 dark:bg-gray-800 overflow-hidden">
+                        <img src="ocean.jpg" alt="海洋主題造型設計" class="absolute inset-0 w-full h-full object-cover z-0 transition-transform duration-500 group-hover:scale-105" onerror="this.style.display='none'">
+                        <div class="absolute inset-0 bg-gradient-to-br from-[#7AB0C8] to-[#254E62] z-[-1]"></div>
                     </div>
                     <div class="p-6 flex-grow flex flex-col relative z-10 bg-white/70 dark:bg-black/40 backdrop-blur-md">
                         <div class="flex justify-between items-start mb-2">
@@ -251,16 +256,10 @@
                 </div>
 
                 <!-- 專案 4: 品牌與周邊設計 -->
-                <div onclick="openModal('laitien')" class="glass-card rounded-2xl overflow-hidden flex flex-col h-full md:col-span-2 lg:col-span-3 cursor-pointer group">
-                    <div class="h-48 md:h-64 bg-gradient-to-r from-[#F6F7F9] to-[#E3E8EC] flex items-center justify-center relative overflow-hidden">
-                        <div class="absolute inset-0 bg-[#354353] mix-blend-multiply opacity-20 dark:opacity-80 transition-opacity"></div>
-                        <div class="relative z-10 flex items-center space-x-4 group-hover:scale-105 transition-transform duration-500">
-                            <!-- 模擬來電書局 LOGO -->
-                            <div class="text-[#E9B167] text-5xl font-bold tracking-tighter relative">
-                                <span class="absolute -top-6 -left-4 text-7xl text-[#67A3C5] opacity-50">💡</span>
-                                LAI TIEN
-                            </div>
-                        </div>
+                <div onclick="openModal('laitien')" class="glass-card rounded-2xl overflow-hidden flex flex-col h-full md:col-span-2 lg:col-span-2 cursor-pointer group">
+                    <div class="h-48 md:h-64 flex items-center justify-center relative bg-gray-200 dark:bg-gray-800 overflow-hidden">
+                        <img src="Mockup_logo_rgb.jpg" alt="來電書局品牌與周邊設計" class="absolute inset-0 w-full h-full object-cover z-0 transition-transform duration-500 group-hover:scale-105" onerror="this.style.display='none'">
+                        <div class="absolute inset-0 bg-gradient-to-r from-[#F6F7F9] to-[#E3E8EC] z-[-1]"></div>
                     </div>
                     <div class="p-6 md:p-8 flex-grow flex flex-col md:flex-row gap-6 relative z-10 bg-white/70 dark:bg-black/40 backdrop-blur-md">
                         <div class="flex-1">
@@ -278,6 +277,26 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- 專案 5: 遺憾交易所 (新增) -->
+                <div onclick="openModal('regret')" class="glass-card rounded-2xl overflow-hidden flex flex-col h-full md:col-span-1 lg:col-span-1 cursor-pointer group">
+                    <div class="h-48 md:h-64 flex items-center justify-center relative bg-gray-200 dark:bg-gray-800 overflow-hidden">
+                        <img src="桌遊上蓋_mockup.png" alt="遺憾交易所桌遊設計" class="absolute inset-0 w-full h-full object-cover z-0 transition-transform duration-500 group-hover:scale-105" onerror="this.style.display='none'">
+                        <div class="absolute inset-0 bg-gradient-to-br from-[#d4c3b3] to-[#8c7a6b] z-[-1]"></div>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col relative z-10 bg-white/70 dark:bg-black/40 backdrop-blur-md">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="text-xl font-bold group-hover:text-[#8c7a6b] dark:group-hover:text-[#d4c3b3] transition-colors">遺憾交易所</h3>
+                            <span class="text-xs text-gray-600 bg-gray-100 dark:text-gray-400 dark:bg-black/50 px-2 py-1 rounded">2026</span>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm flex-grow mt-2">跨媒體整合課程桌遊設計。探索「遺憾如何影響人生」，透過故事拼接與情緒轉化，引導玩家反思。</p>
+                        <div class="mt-4 flex gap-2 text-xs">
+                            <span class="px-2 py-1 bg-black/5 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded font-medium">Ai</span>
+                            <span class="px-2 py-1 bg-black/5 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded font-medium">Ps</span>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </section>
 
@@ -288,20 +307,11 @@
                 
                 <!-- CookOS App -->
                 <div onclick="openModal('cookos')" class="glass-card rounded-3xl overflow-hidden cursor-pointer group">
-                    <div class="h-64 bg-gradient-to-br from-[#F4853F] to-[#C95C17] flex items-center justify-center relative overflow-hidden">
-                        <div class="w-48 h-full bg-white/20 dark:bg-white/10 mx-auto shadow-2xl backdrop-blur-sm rounded-t-3xl mt-10 border border-white/30 dark:border-white/20 p-4 group-hover:translate-y-2 transition-transform duration-500">
-                            <div class="w-10 h-1 bg-white/50 dark:bg-white/30 rounded-full mx-auto mb-4"></div>
-                            <div class="space-y-3">
-                                <div class="h-24 bg-white/30 dark:bg-white/20 rounded-xl"></div>
-                                <div class="h-8 bg-white/30 dark:bg-white/20 rounded-md w-3/4"></div>
-                                <div class="flex gap-2">
-                                    <div class="h-12 bg-white/30 dark:bg-white/20 rounded-md flex-1"></div>
-                                    <div class="h-12 bg-white/30 dark:bg-white/20 rounded-md flex-1"></div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="h-64 flex items-center justify-center relative bg-gray-200 dark:bg-gray-800 overflow-hidden">
+                        <img src="phone-cookos.png" alt="CookOS App" class="absolute inset-0 w-full h-full object-cover z-0 transition-transform duration-500 group-hover:scale-105" onerror="this.style.display='none'">
+                        <div class="absolute inset-0 bg-gradient-to-br from-[#F4853F] to-[#C95C17] z-[-1]"></div>
                     </div>
-                    <div class="p-8 relative z-10 bg-white/70 dark:bg-black/40 backdrop-blur-md">
+                    <div class="p-8 relative z-10 bg-white/70 dark:bg-black/40 backdrop-blur-md border-t border-white/10">
                         <div class="flex items-start justify-between mb-4">
                             <div>
                                 <h3 class="text-2xl font-bold group-hover:text-[#F4853F] transition-colors">CookOS App</h3>
@@ -321,20 +331,11 @@
 
                 <!-- Foodomo App Redesign -->
                 <div onclick="openModal('foodomo')" class="glass-card rounded-3xl overflow-hidden cursor-pointer group">
-                    <div class="h-64 bg-gradient-to-br from-[#CE0019] to-[#8C0011] flex items-center justify-center relative overflow-hidden">
-                         <div class="w-48 h-full bg-white/20 dark:bg-white/10 mx-auto shadow-2xl backdrop-blur-sm rounded-t-3xl mt-10 border border-white/30 dark:border-white/20 p-4 group-hover:translate-y-2 transition-transform duration-500">
-                            <div class="w-10 h-1 bg-white/50 dark:bg-white/30 rounded-full mx-auto mb-4"></div>
-                            <div class="h-8 bg-white/30 dark:bg-white/20 rounded-full mb-3 flex items-center px-3"><div class="w-4 h-4 rounded-full bg-white/50 dark:bg-white/30"></div></div>
-                            <div class="grid grid-cols-4 gap-2 mb-4">
-                                <div class="h-8 bg-white/30 dark:bg-white/20 rounded-md"></div>
-                                <div class="h-8 bg-white/30 dark:bg-white/20 rounded-md"></div>
-                                <div class="h-8 bg-white/30 dark:bg-white/20 rounded-md"></div>
-                                <div class="h-8 bg-white/30 dark:bg-white/20 rounded-md"></div>
-                            </div>
-                            <div class="h-20 bg-white/30 dark:bg-white/20 rounded-xl mb-3"></div>
-                        </div>
+                    <div class="h-64 flex items-center justify-center relative bg-gray-200 dark:bg-gray-800 overflow-hidden">
+                         <img src="phone-foodomo.png" alt="Foodomo App (Redesign)" class="absolute inset-0 w-full h-full object-cover z-0 transition-transform duration-500 group-hover:scale-105" onerror="this.style.display='none'">
+                         <div class="absolute inset-0 bg-gradient-to-br from-[#CE0019] to-[#8C0011] z-[-1]"></div>
                     </div>
-                    <div class="p-8 relative z-10 bg-white/70 dark:bg-black/40 backdrop-blur-md">
+                    <div class="p-8 relative z-10 bg-white/70 dark:bg-black/40 backdrop-blur-md border-t border-white/10">
                         <div class="flex items-start justify-between mb-4">
                             <div>
                                 <h3 class="text-2xl font-bold group-hover:text-[#CE0019] dark:group-hover:text-red-400 transition-colors">Foodomo App (Redesign)</h3>
@@ -360,14 +361,37 @@
             <h2 class="text-3xl font-bold mb-10 pl-4 border-l-4 border-gray-800 dark:border-white">網頁設計 Web Design</h2>
             
             <div class="space-y-8">
-                <!-- 專案 1 -->
-                <div onclick="openModal('yzubook')" class="glass-card rounded-3xl overflow-hidden flex flex-col md:flex-row cursor-pointer group">
-                    <div class="md:w-1/3 bg-gradient-to-br from-[#41295a] to-[#2F0743] p-8 flex items-center justify-center overflow-hidden">
-                        <div class="text-center group-hover:scale-110 transition-transform duration-500">
-                            <div class="text-5xl mb-4">📚</div>
-                            <h4 class="text-xl font-bold text-white mb-1">元智二手書</h4>
-                            <p class="text-sm text-purple-200">校園交易平台</p>
+
+                <!-- 專案 1 (新增): 元智大逃亡 -->
+                <div onclick="openModal('yzuescape')" class="glass-card rounded-3xl overflow-hidden flex flex-col md:flex-row cursor-pointer group">
+                    <div class="md:w-1/3 h-48 md:h-auto flex items-center justify-center bg-gray-200 dark:bg-gray-800 overflow-hidden relative">
+                        <img src="yzu-game.png" alt="元智大逃亡" class="absolute inset-0 w-full h-full object-cover z-0 transition-transform duration-500 group-hover:scale-105" onerror="this.style.display='none'">
+                        <div class="absolute inset-0 bg-gradient-to-br from-[#1a2a6c] to-[#b21f1f] z-[-1]"></div>
+                    </div>
+                    <div class="p-8 md:w-2/3 flex flex-col justify-center relative z-10 bg-white/70 dark:bg-black/40 backdrop-blur-md">
+                        <div class="flex items-center gap-3 mb-4">
+                            <h3 class="text-2xl font-bold group-hover:text-[#b21f1f] dark:group-hover:text-[#ff7b7b] transition-colors">元智大逃亡 網頁遊戲</h3>
+                            <span class="px-2 py-1 bg-red-100 text-red-700 dark:bg-red-500/20 dark:text-red-300 text-[10px] rounded border border-red-200 dark:border-red-500/30 font-medium">網頁程式設計</span>
                         </div>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm mb-4 leading-relaxed">
+                            以元智大學校園為背景的快節奏橫向卷軸動作跑酷遊戲。轉化學業壓力為具象化的陷阱攻擊，讓玩家在遊戲中體驗躲避壓力的快感。
+                        </p>
+                        <ul class="text-sm text-gray-500 dark:text-gray-400 space-y-2 list-disc list-inside mb-6">
+                            <li>使用 Phaser 3 / p5.js 進行程式框架搭建。</li>
+                            <li>結合現代寫實與賽博龐克風格的異化夢境場景。</li>
+                            <li>負責區塊：美術設計（精靈圖動畫、技能特效、海報）及音樂風格。</li>
+                        </ul>
+                        <div class="mt-auto">
+                             <span class="text-xs text-gray-600 bg-gray-100 dark:text-gray-400 dark:bg-white/10 px-3 py-1 rounded-full font-medium">2026 年份作品</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 專案 2 -->
+                <div onclick="openModal('yzubook')" class="glass-card rounded-3xl overflow-hidden flex flex-col md:flex-row cursor-pointer group">
+                    <div class="md:w-1/3 h-48 md:h-auto flex items-center justify-center bg-gray-200 dark:bg-gray-800 overflow-hidden relative">
+                        <img src="yzu-book.png" alt="元智二手書交易平台" class="absolute inset-0 w-full h-full object-cover z-0 transition-transform duration-500 group-hover:scale-105" onerror="this.style.display='none'">
+                        <div class="absolute inset-0 bg-gradient-to-br from-[#41295a] to-[#2F0743] z-[-1]"></div>
                     </div>
                     <div class="p-8 md:w-2/3 flex flex-col justify-center relative z-10 bg-white/70 dark:bg-black/40 backdrop-blur-md">
                         <h3 class="text-2xl font-bold mb-4 group-hover:text-[#41295a] dark:group-hover:text-purple-300 transition-colors">元智二手書交易平台</h3>
@@ -385,14 +409,11 @@
                     </div>
                 </div>
 
-                <!-- 專案 2 -->
+                <!-- 專案 3 -->
                 <div onclick="openModal('savecat')" class="glass-card rounded-3xl overflow-hidden flex flex-col md:flex-row cursor-pointer group">
-                    <div class="md:w-1/3 bg-gradient-to-br from-[#74ebd5] to-[#ACB6E5] p-8 flex items-center justify-center overflow-hidden">
-                        <div class="text-center group-hover:scale-110 transition-transform duration-500">
-                            <div class="text-5xl mb-4">🐱</div>
-                            <h4 class="text-xl font-bold text-gray-900 mb-1">搶救貓咪大作戰</h4>
-                            <p class="text-sm text-gray-800">互動式對話遊戲</p>
-                        </div>
+                    <div class="md:w-1/3 h-48 md:h-auto flex items-center justify-center bg-gray-200 dark:bg-gray-800 overflow-hidden relative">
+                        <img src="save-cat.png" alt="搶救貓咪大作戰" class="absolute inset-0 w-full h-full object-cover z-0 transition-transform duration-500 group-hover:scale-105" onerror="this.style.display='none'">
+                        <div class="absolute inset-0 bg-gradient-to-br from-[#74ebd5] to-[#ACB6E5] z-[-1]"></div>
                     </div>
                     <div class="p-8 md:w-2/3 flex flex-col justify-center relative z-10 bg-white/70 dark:bg-black/40 backdrop-blur-md">
                         <div class="flex items-center gap-3 mb-4">
@@ -423,44 +444,59 @@
                 
                 <!-- 專案: 龍岡豌豆粉 (YouTube) -->
                 <div onclick="openModal('longgang')" class="glass-card rounded-2xl overflow-hidden flex flex-col h-full cursor-pointer group">
-                    <div class="h-48 md:h-64 bg-gradient-to-br from-[#8ba168] to-[#4c5c35] flex items-center justify-center relative text-white group-hover:scale-105 transition-transform duration-500 overflow-hidden">
-                        <!-- 模擬播放按鈕圖示 -->
-                        <div class="w-16 h-16 bg-black/30 rounded-full flex items-center justify-center backdrop-blur-sm shadow-lg z-10 group-hover:bg-red-600 transition-colors">
-                            <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
+                    <!-- 圖片縮圖區塊 -->
+                    <div class="h-48 md:h-64 flex items-center justify-center relative bg-gray-200 dark:bg-gray-800 overflow-hidden group-hover:opacity-90 transition-opacity duration-300">
+                        <img src="豌豆.png" alt="龍岡豌豆粉" class="absolute inset-0 w-full h-full object-cover z-0" onerror="this.style.display='none'">
+                        
+                        <!-- 播放按鈕圖示 (疊在圖片上方) -->
+                        <div class="relative z-10 w-16 h-16 bg-black/40 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300 group-hover:bg-red-600">
+                            <div class="w-7 h-7 bg-white rounded-full flex items-center justify-center">
+                                <svg class="w-3.5 h-3.5 text-black ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                            </div>
                         </div>
                     </div>
-                    <div class="p-6 flex-grow flex flex-col relative z-10 bg-white/70 dark:bg-black/40 backdrop-blur-md">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-xl font-bold group-hover:text-[#8ba168] transition-colors">龍岡豌豆粉</h3>
-                            <span class="text-xs text-gray-600 bg-gray-100 dark:text-gray-400 dark:bg-black/50 px-2 py-1 rounded">影片</span>
+                    <div class="p-6 flex-grow flex flex-col relative z-10 bg-white dark:bg-gray-900">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-[#6d804e] transition-colors">龍岡豌豆粉</h3>
+                            <span class="text-xs text-gray-500 bg-gray-100 dark:bg-gray-800 dark:text-gray-400 px-3 py-1 rounded-md">影片</span>
                         </div>
-                        <p class="text-gray-600 dark:text-gray-400 text-sm flex-grow mt-2">在地美食紀錄短片，運用鏡頭捕捉龍岡豌豆粉的製作過程與人文風情。</p>
-                        <div class="mt-4 flex gap-2 text-xs">
-                            <span class="px-2 py-1 bg-black/5 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded font-medium">Capcut</span>
-                            <span class="px-2 py-1 bg-black/5 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded font-medium">VRoid  Studio</span>
-                            <span class="px-2 py-1 bg-black/5 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded font-medium">OBS</span>
-
+                        <p class="text-gray-600 dark:text-gray-400 text-sm flex-grow mb-6 leading-relaxed">在地美食紀錄短片，運用鏡頭捕捉龍岡豌豆粉的製作過程與人文風情。</p>
+                        <div class="flex gap-2 text-xs">
+                            <span class="px-3 py-1.5 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-md">Capcut</span>
+                            <span class="px-3 py-1.5 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-md">VRoid Studio</span>
+                            <span class="px-3 py-1.5 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-md">OBS</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- 專案: 動畫作品 (Video 檔案) -->
                 <div onclick="openModal('animation')" class="glass-card rounded-2xl overflow-hidden flex flex-col h-full cursor-pointer group">
-                    <div class="h-48 md:h-64 bg-gradient-to-br from-[#5c4a7c] to-[#2c1c45] flex items-center justify-center relative text-white group-hover:scale-105 transition-transform duration-500 overflow-hidden">
-                        <div class="text-6xl z-10 group-hover:rotate-12 transition-transform">✨</div>
-                    </div>
-                    <div class="p-6 flex-grow flex flex-col relative z-10 bg-white/70 dark:bg-black/40 backdrop-blur-md">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-xl font-bold group-hover:text-[#a084ca] transition-colors">動畫設計作品</h3>
-                            <span class="text-xs text-gray-600 bg-gray-100 dark:text-gray-400 dark:bg-black/50 px-2 py-1 rounded">動畫</span>
+                    <!-- 圖片縮圖區塊 -->
+                    <div class="h-48 md:h-64 flex items-center justify-center relative bg-gray-200 dark:bg-gray-800 overflow-hidden group-hover:opacity-90 transition-opacity duration-300">
+                        <img src="資產 2.png" alt="動畫設計作品" class="absolute inset-0 w-full h-full object-cover z-0" onerror="this.style.display='none'">
+                        
+                        <!-- 播放按鈕圖示 (疊在圖片上方) -->
+                        <div class="relative z-10 w-16 h-16 bg-black/40 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300 group-hover:bg-[#a084ca]">
+                            <div class="w-7 h-7 bg-white rounded-full flex items-center justify-center">
+                                <svg class="w-3.5 h-3.5 text-black ml-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                            </div>
                         </div>
-                        <p class="text-gray-600 dark:text-gray-400 text-sm flex-grow mt-2">動態圖像設計與角色動畫，展現流暢的視覺節奏與故事張力。</p>
-                        <div class="mt-4 flex gap-2 text-xs">
-                            <span class="px-2 py-1 bg-black/5 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded font-medium">Krita</span>
-                            <span class="px-2 py-1 bg-black/5 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded font-medium">DaVinci Resolve</span>
+                    </div>
+                    <div class="p-6 flex-grow flex flex-col relative z-10 bg-white dark:bg-gray-900">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-[#a084ca] transition-colors">動畫設計作品</h3>
+                            <span class="text-xs text-gray-500 bg-gray-100 dark:bg-gray-800 dark:text-gray-400 px-3 py-1 rounded-md">動畫</span>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm flex-grow mb-6 leading-relaxed">動態圖像設計與角色動畫，展現流暢的視覺節奏與故事張力。</p>
+                        <div class="flex gap-2 text-xs">
+                            <span class="px-3 py-1.5 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-md">Krita</span>
+                            <span class="px-3 py-1.5 bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 rounded-md">DaVinci Resolve</span>
                         </div>
                     </div>
                 </div>
+
+                
+
             </div>
         </section>
 
@@ -474,7 +510,7 @@
             <div class="mb-10">
                 <h2 id="detail-title" class="text-4xl md:text-6xl font-extrabold text-gray-900 dark:text-white mb-6 tracking-tight">專案名稱</h2>
                 <div id="detail-tags" class="flex flex-wrap gap-3 text-sm mb-10">
-                    <!-- 標籤會動態插入在這裡 -->
+                    <!-- 標籤與 IG 按鈕會動態插入在這裡 -->
                 </div>
                 <div id="detail-desc" class="text-gray-600 dark:text-gray-300 leading-relaxed text-lg md:text-xl space-y-6">
                     <!-- 描述會動態插入在這裡 -->
@@ -499,12 +535,41 @@
             </div>
         </section>
 
+        <!-- Instagram 內嵌專屬彈出視窗 (Modal) -->
+        <div id="ig-modal" class="fixed inset-0 z-[200] hidden items-center justify-center">
+            <!-- 半透明黑色遮罩，點擊可關閉 -->
+            <div id="ig-modal-backdrop" class="absolute inset-0 bg-black/80 backdrop-blur-sm cursor-pointer" onclick="closeIgModal()"></div>
+            
+            <!-- 視窗主體 -->
+            <div id="ig-modal-content" class="relative z-10 w-[90%] max-w-lg bg-white dark:bg-gray-900 rounded-3xl shadow-2xl overflow-hidden flex flex-col scale-95 opacity-0 transition-all duration-300">
+                <!-- 關閉按鈕 -->
+                <div class="absolute top-4 right-4 z-20">
+                    <button onclick="closeIgModal()" class="p-2 bg-gray-200/80 dark:bg-black/50 hover:bg-gray-300 dark:hover:bg-gray-700 rounded-full text-gray-800 dark:text-white transition-colors backdrop-blur-md">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
+                </div>
+                
+                <!-- IG Iframe 容器 -->
+                <div id="ig-iframe-container" class="w-full h-[70vh] md:h-[80vh] bg-gray-50 dark:bg-gray-800 flex items-center justify-center relative">
+                    <!-- Iframe 將由 JS 動態生成 -->
+                </div>
+            </div>
+        </div>
+
         <!-- Footer -->
         <footer class="border-t border-gray-200 dark:border-white/10 py-10 text-center text-gray-500 text-sm bg-gray-100/50 dark:bg-black/50 transition-colors duration-300">
             <p>© 2026 DENG YU-ZHEN. All Rights Reserved.</p>
         </footer>
 
     </main>
+
+    <!-- 圖片放大視窗 (Image Viewer) -->
+    <div id="image-viewer" class="fixed inset-0 z-[150] hidden items-center justify-center bg-black/95 backdrop-blur-sm opacity-0 transition-opacity duration-300" onclick="closeImageViewer()">
+        <button class="absolute top-6 right-6 text-white hover:text-gray-300 p-2 focus:outline-none z-50" onclick="closeImageViewer()">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+        <img id="viewer-image" src="" class="max-w-[95vw] max-h-[95vh] object-contain rounded-lg scale-95 transition-transform duration-300 relative z-40">
+    </div>
 
     <script>
         // --- 專案詳細資料資料庫 ---
@@ -514,73 +579,91 @@
                 title: "元智資傳系封面設計",
                 tags: ["平面設計", "Ai", "Ps", "2025"],
                 description: "本系列作品結合了平面設計的基本原則（平衡、強調、節奏、統一）與構成元素（線條、形狀、色彩與明度），並以「2025 YZUIC」元智大學資訊傳播學系為主題創意發想。<br><br>除了透過不同元素來呈現設計原則，畫面中也運用了許多扭曲與變形的效果來增加視覺變化，展現資傳系多元且充滿活力的特質。",
-                images: ["Free_Grid_Box_2 (3).jpg", "平面設計箱子.jpg"]
+                images: ["boxes.jpg"]
             },
             lisa: {
                 title: "色調分離 (LISA)",
                 tags: ["平面設計", "Ai", "Ps", "2025"],
                 description: "這是一件以 LISA 的臉部為主角的「色調分離」練習作品。<br><br>當時我剛開始接觸 Adobe Illustrator 幾個月，透過這個作品，我不僅練習了圖層的處理，也讓我更熟練地掌握鋼筆工具的運用。運用有限的色塊來捕捉人物的神韻，是這份作品最大的挑戰與收穫。",
-                images: ["poster-on-wall-mockup.jpg"]
+                images: ["lisa.jpg"]
             },
             ocean: {
                 title: "海洋主題造型設計",
                 tags: ["造型設計", "Ai", "Ps", "2025"],
                 description: "這是以海洋為主題的造型設計，限制每個角色必須由圓形、方形與三角形組成，挑戰在幾何限制中表現出生物的特色。<br><br>透過解構與重組，讓每一隻海洋生物都具有獨特的幾何美感。最後，我也將這些角色 Mockup 用貼紙來模擬實際呈現效果。",
-                images: ["替換圖片網址_海洋生物造型_1.jpg"] // 預留空間，未來可替換
+                images: ["ocean.jpg"] // 預留空間，未來可替換
             },
             laitien: {
                 title: "來電書局品牌與周邊設計",
                 tags: ["品牌識別 (CI)", "平面設計", "2025"],
                 description: "這是以原先來電書局的LOGO去優化的作品，新版LOGO以電線和電燈泡、書為主要元素，靈感來自於店名「來電書局」。由於主要受眾是國中小學生因此選用活潑的色系，使用原 LOGO 黃色和藍色的電線連成電燈泡的樣子，中間的燈絲則是英文店名字首L和T。<br><br><strong>周邊設計延伸：</strong><br>以來電書局的品牌視覺橘色與藍色為主調，並由核心圖樣黃藍相間的和風花紋裝飾，為學生族群設計一系列周邊產品（如：名片、招牌、筆記本、帆布袋、紙膠帶），為校園生活注入滿滿的電力。",
-                images: ["Mockup_logo_rgb.jpg", "color-Sign-Logo-Mockup_rgb.jpg", "Free Square Signboard Mockup_rgb.jpg", "平面設計周邊_rgb.jpg"]
+                images: ["Square Signboard Mockup_rgb.jpg", "color-Sign-Logo-Mockup_rgb.jpg","Businesscard-cmyk.png","logo_product.jpg","trifold brochure.png","bag-rgb.png"]
             },
-            // 更新：龍岡豌豆粉專案內容與圖片
+            // 遺憾交易所桌遊設計
+            regret: {
+                title: "遺憾交易所 (桌遊設計)",
+                tags: ["平面設計", "桌遊設計", "跨媒體整合", "2026"],
+                description: "這是跨媒體整合課程的桌遊設計專案。<br><strong>本專案由團隊（巫品儀、林晁如、鄧鈺臻、黃學芊）合力完成。</strong><br><br><strong>遊戲理念：</strong><br>探索「遺憾如何影響人生」，讓玩家面對未完成的選擇與情緒，解鎖開放式結局（和解或新的可能）。<br><br><strong>遊戲機制：</strong><br>採5回合制，透過「出牌 → 計分 → 抵消 → 敘事」進行全體合作勝利機制。當角色達到5分即完成釋然。遊戲以「故事拼接」與「情緒轉化」雙軸運作，建立角色之間彼此牽動的因果關係，引導玩家思考：如果重來，會不會不同。讓玩家獲得情感共鳴與反思，體驗人生可以被重新理解。<br><br><strong>網站：</strong>雖然是實體桌遊，我們也製作了簡約的手機版導覽網頁，您可以直接在下方內嵌視窗中滑動預覽！",
+                images: ["桌遊上蓋_mockup.png", "桌遊下蓋_mockup.png","card_mockup_4K.jpg"],
+                iframe: "https://yuzhen0619.github.io/regret.exchange/", // ✨ 在這裡貼上您的 GitHub Pages 網址
+                instagram: "regret_exchange", // ✨ 在這裡填寫 IG 帳號名稱 (不用加 @)
+                instagramLink: "https://www.instagram.com/regret_exchange/" // ✨ 在這裡貼上完整的 IG 網址 (https://www.instagram.com/...)
+            },
+            // 龍岡豌豆粉專案內容
             longgang: {
                 title: "龍岡豌豆粉",
                 tags: ["影音企劃", "剪輯", "美食紀錄", "VTuber"],
-                description: "這是一支關於在地美食「龍岡豌豆粉」的紀錄短片。<strong>本影片專案由團隊（徐曼玲、鄧鈺臻、胡紘睿、林奕辰）合力完成。</strong><br><br><strong>專案主題：</strong>舌尖上的文化遺產與跨越時空的文化傳承。<br><br><strong>拍攝與製作過程：</strong><br>我們實地走訪了忠貞市場附近的忠貞雲鄉米干本店，拍攝了龍岡豌豆粉的四種吃法：涼拌豌豆粉、稀豆粉、炸豆粉和炸豆片。希望讓觀眾了解豌豆粉並非粉末狀，而是固態且口味多樣，吸引更多人關注並傳遞這份美食。<br><br>我們使用手機和相機拍攝，再用 CapCut 剪輯影片。虛擬角色是用 VRoid Studio 製作，並使用 webcam motion capture 捕捉動作，導入 OBS，使我們的豌豆粉小精靈更加生動有趣。<br><br><strong>虛擬角色設計：</strong><br>豌豆粉小精靈的創作理念融合了自然元素與夢幻色彩，靈感來自豌豆。服裝上的金屬飾物和綠色花紋突顯了精靈的優雅和自然和諧。整體造型輕盈靈動，如涼拌豌豆粉般清爽。<br><br><strong>圖騰投影：</strong><br>主題聚焦雲南少數民族，圖騰構想汲取課堂講座精髓泰緬孤軍與少數民族後裔現身分享家鄉文化，多元圖騰展現金三角地區傳統服飾特色，無特定族群限制。汲取多元圖騰精華，四個圖型經由鉛筆畫出雛型，再用 Adobe Illustrator 繪製金屬質感的圖型，最後用 Adobe After Effects 讓圖型活躍起來。",
-                images: ["替換圖片網址_龍岡豌豆粉_吃法介紹_1.jpg", "替換圖片網址_龍岡豌豆粉_VTuber角色_2.jpg", "替換圖片網址_龍岡豌豆粉_傳統圖騰_3.jpg", "替換圖片網址_龍岡豌豆粉_圖騰投影展示_4.jpg"],
-                video: "https://www.youtube.com/watch?v=請替換為您的YouTube影片ID" // ✨ 直接貼上您的 YouTube 不公開網址
+                description: "這是一支關於在地美食「龍岡豌豆粉」的紀錄短片。<br><strong>本影片專案由團隊（徐曼玲、鄧鈺臻、胡紘睿、林奕辰）合力完成。</strong><br><br><strong>專案主題：</strong>舌尖上的文化遺產與跨越時空的文化傳承。<br><br><strong>拍攝與製作過程：</strong><br>我們實地走訪了忠貞市場附近的忠貞雲鄉米干本店，拍攝了龍岡豌豆粉的四種吃法：涼拌豌豆粉、稀豆粉、炸豆粉和炸豆片。希望讓觀眾了解豌豆粉並非粉末狀，而是固態且口味多樣，吸引更多人關注並傳遞這份美食。<br><br>我們使用手機和相機拍攝，再用 CapCut 剪輯影片。虛擬角色是用 VRoid Studio 製作，並使用 webcam motion capture 捕捉動作，導入 OBS，使我們的豌豆粉小精靈更加生動有趣。<br><br><strong>虛擬角色設計：</strong><br>豌豆粉小精靈的創作理念融合了自然元素與夢幻色彩，靈感來自豌豆。服裝上的金屬飾物和綠色花紋突顯了精靈的優雅和自然和諧。整體造型輕盈靈動，如涼拌豌豆粉般清爽。",
+                images: ["期末海報 (2).png"],
+                video: "https://youtu.be/ed4pUNgjFo8" // ✨ 直接貼上您的 YouTube 不公開網址
             },
             // 動畫作品 (MP4/WebM 檔案支援)
             animation: {
                 title: "杯子的冒險故事",
                 tags: ["動畫", "Krita", "DaVinci Resolve"],
-                description: "這是一個關於杯子與冰塊的冒險動畫。<strong>本影片專案由團隊（游祐瑄、陳品霓、徐曼玲、鄧鈺臻）合力完成。</strong><br><br><strong>心得感想：</strong><br>這次的動畫課程專案對我們全組來說，收穫了許多豐富的經驗。起初，因為劇情設定過於複雜，導致畫面和動作設計耗時過多，進度稍有落後。後來，我們聽從老師的建議，簡化劇情，並將重點放在「抓冰塊」這個核心動作上。同時，我們也實際演出角色動作並拍攝影片作為參考，調整了動作節奏，有效提升了動畫的流暢度。<br><br>粗剪後，我們發現 Time and Spacing 有些問題，使得角色動作不夠自然。經過調整，我們讓角色的動作更合理，動畫表現也因此提升。這個過程讓我們更深入理解動畫原理，特別是時間控制和動作節奏的應用，也深刻體會到時間掌握的重要性。<br><br>製作過程中，我們也針對進度安排和工作分配做了必要調整。透過定期溝通與檢討，我們有效掌握進度，確保各環節順利完成。這讓我們更清楚如何發揮每位成員的優勢，使團隊合作更加順暢。",
-                // images: ["替換圖片網址_杯子角色設計_1.png", "替換圖片網址_杯子場景設計_2.png"], // ✨ 填入您資料夾中的圖片檔名
-                video: "./video/動畫.mp4" // ✨ 填入您資料夾中的影片檔名，例如: "https://yuzhen0619.github.io/catgame/my_animation.mp4"
+                description: "這是一個關於杯子與冰塊的冒險動畫。<br><strong>本影片專案由團隊（游祐瑄、陳品霓、徐曼玲、鄧鈺臻）合力完成。</strong><br><br><strong>心得感想：</strong><br>這次的動畫課程專案對我們全組來說，收穫了許多豐富的經驗。起初，因為劇情設定過於複雜，導致畫面和動作設計耗時過多，進度稍有落後。後來，我們聽從老師的建議，簡化劇情，並將重點放在「抓冰塊」這個核心動作上。同時，我們也實際演出角色動作並拍攝影片作為參考，調整了動作節奏，有效提升了動畫的流暢度。<br><br>粗剪後，我們發現 Time and Spacing 有些問題，使得角色動作不夠自然。經過調整，我們讓角色的動作更合理，動畫表現也因此提升。這個過程讓我們更深入理解動畫原理，特別是時間控制和動作節奏的應用，也深刻體會到時間掌握的重要性。<br><br>製作過程中，我們也針對進度安排和工作分配做了必要調整。透過定期溝通與檢討，我們有效掌握進度，確保各環節順利完成。這讓我們更清楚如何發揮每位成員的優勢，使團隊合作更加順暢。",
+                images: ["海報.png"], // ✨ 填入您資料夾中的圖片檔名
+                video: "video.mp4" // ✨ 填入您資料夾中的影片檔名，例如: "./videos/my_animation.mp4"
             },
             cookos: {
                 title: "CookOS App - 未來飲食導引系統",
                 tags: ["UI/UX", "第23屆育秀盃 複賽入圍", "2025"],
-                description: "這是一款針對2050年高壓生活設計的未來飲食導引系統 APP - CookOS。結合「料理打印機」與「生物晶片」，實現「隨心所欲用餐，同時保證健康」的未來願景。<br><br><strong>四大核心功能：</strong><br>1. <strong>智慧點餐：</strong>AI整合個人偏好飲食與即時狀態，推薦每日方案。<br>2. <strong>飲食規劃：</strong>為忙碌族群量身打造一日三餐及長期飲食計畫。<br>3. <strong>客製化食譜：</strong>自由編寫食譜，透過數位模擬預測口感並優化建議。<br>4. <strong>社群商城：</strong>在商城探索多元食譜，並於社群分享個人專屬打印料理。<br><br>在製作過程中，我們建立了Persona (陳柏安，34歲金融科技顧問)，並繪製了使用者旅程地圖與服務藍圖，確保產品邏輯貼合使用者痛點。",
-                // images: ["替換圖片網址_CookOS介面_1.jpg"], // 預留空間，未來可替換
+                description: "這是一款針對2050年高壓生活設計的未來飲食導引系統 APP - CookOS。<br><strong>本專案由團隊（鄧鈺臻、黃翊、陳祐聖、陳柏睿、吳建興）合力完成。</strong>結合「料理打印機」與「生物晶片」，實現「隨心所欲用餐，同時保證健康」的未來願景。<br><br><strong>四大核心功能：</strong><br>1. <strong>智慧點餐：</strong>AI整合個人偏好飲食與即時狀態，推薦每日方案。<br>2. <strong>飲食規劃：</strong>為忙碌族群量身打造一日三餐及長期飲食計畫。<br>3. <strong>客製化食譜：</strong>自由編寫食譜，透過數位模擬預測口感並優化建議。<br>4. <strong>社群商城：</strong>在商城探索多元食譜，並於社群分享個人專屬打印料理。<br><br>在製作過程中，我們建立了Persona，並繪製了使用者旅程地圖與服務藍圖，確保產品邏輯貼合使用者痛點。",
+                images: ["cookos-Perspective App Screens Mock-Up-rgb.jpg"], // 預留空間，未來可替換
                 iframe: "https://www.figma.com/proto/4Ygb3tANrQApBF5VFk2neW/CookOS_1121854%E9%84%A7%E9%88%BA%E8%87%BB?node-id=0-1&t=Y4XfEzSmq1e4h68a-1" 
             },
             foodomo: {
                 title: "Foodomo App (Redesign)",
                 tags: ["UI/UX", "App Redesign", "2025"],
                 description: "這款APP是統一企業的外送平台，但原先的評價無論是在 Google Play 和 Apple Store 都不太好，主要原因是 APP介面不流暢，導致使用者的操作體驗不佳。因此找出問題後，重新設計使用者介面，優化使用者體驗。<br><br><strong>主要痛點與改善策略：</strong><br>1. <strong>購物車限制：</strong>原先只會顯示最近加入的一個商店購物車，我們建立了「多店購物車清單」功能，讓使用者能同時查看不同商店的購物車。<br>2. <strong>分類結構繁雜：</strong>優化商品篩選分類介面，減少層級，讓常用商品更快被找到。<br>3. <strong>廣告干擾：</strong>將首頁廣告區域佔比縮小，凸顯核心點餐功能。<br><br>我們也重新制定了 Design System (Color Tokens, Spacing Tokens, Buttons) 來確保重設計後的介面一致性與質感。",
-                // images: ["Perspective App Screens Mock-Up-rgb.jpg"],
+                images: ["Perspective App Screens Mock-Up-rgb.jpg"],
                 iframe: "https://www.figma.com/proto/U8t1l9CkWsLYdI9SU8NqRA/Foodomo?t=02hxNum3NvYETqRm-1" 
+            },
+            // 元智大逃亡網頁遊戲
+            yzuescape: {
+                title: "元智大逃亡 (網頁遊戲)",
+                tags: ["網頁遊戲", "網頁程式設計", "Phaser 3", "2026"],
+                description: "這是一款以元智大學校園為背景的快節奏橫向卷軸動作跑酷遊戲。<br><strong>本專案由團隊（林昀佑、鄧鈺臻、林君叡）合力完成。</strong><br><br><strong>提案動機與故事：</strong><br>身為元智學生，校園內的斜坡、應對考試及專題是我們的共同回憶。主角是做專題做到快死掉的學生，因過度勞累睡著，做了被多位老師用作業攻擊轟炸的惡夢。我們將學業壓力轉化為具象化的陷阱，讓玩家體驗「躲避壓力、追求自由」的快感。<br><br><strong>遊戲特色與美術：</strong><br>場景融合現代寫實與賽博龐克元素，將日常校園空間「異化」，交織高飽和的霓虹紫與電氣藍，搭配 Glitch 故障藝術，營造超現實的惡夢感。玩家需運用身法躲避法老王(C++審判)、漁夫帽老頭、導師等BOSS的攻擊，收集學分強化自身。<br><br><strong>負責工作：</strong><br>主要負責美術設計（角色精靈圖動畫、遊戲技能/攻擊/學分球/替身球圖、A1海報製作）、列出背景音樂清單及影片字幕製作。",
+                images: ["yzu-game.png", "poster.png"],
+                iframe: "https://eoe1207.github.io/Get-Away-From-YZU/" // ✨ 在這裡貼上您的 GitHub Pages 網址
             },
             yzubook: {
                 title: "元智二手書交易平台",
                 tags: ["網頁設計", "校園平台", "2025"],
-                description: "在圖書館找尋的話有可能書籍會被借走，如果你要自己買新的又很貴而且也不好找，所以我們打造了一個可以讓大家在網路上找到自己科系需要的書籍交易網站。<br><br>我們針對本校學生通勤族或校外居住者購買二手書的不便，提供便捷安心的二手書交易管道。<br><br><strong>平台特色：</strong><br>1. <strong>交易方式：</strong>為了社恐的人，我們設計的這個網站可以選擇運送或面交的交易方式。<br>2. <strong>匿名交流：</strong>擁有八卦牆可以在上方匿名留言，所有留言將於24小時後自動刪除。<br>3. <strong>精準搜尋：</strong>可以按科系分類書籍，買家找書只需知道該書科系分類。",
-                // images: ["替換圖片網址_二手書首頁_1.jpg"], // 預留空間，未來可替換
+                description: "在圖書館找尋的話有可能書籍會被借走，如果你要自己買新的又很貴而且也不好找，所以我們打造了一個可以讓大家在網路上找到自己科系需要的書籍交易網站。<br><strong>本專案由團隊（葉珈彤、林昀佑、鄧鈺臻）合力完成。</strong><br>我們針對本校學生通勤族或校外居住者購買二手書的不便，提供便捷安心的二手書交易管道。<br><br><strong>平台特色：</strong><br>1. <strong>交易方式：</strong>為了社恐的人，我們設計的這個網站可以選擇運送或面交的交易方式。<br>2. <strong>匿名交流：</strong>擁有八卦牆可以在上方匿名留言，所有留言將於24小時後自動刪除。<br>3. <strong>精準搜尋：</strong>可以按科系分類書籍，買家找書只需知道該書科系分類。",
+                images: ["Web Screen PSD Mockup.png"], // 預留空間，未來可替換
                 iframe: "https://yuzhen0619.github.io/bookloop/" // ✨ 在這裡貼上您的 GitHub Pages 網址
             },
             savecat: {
                 title: "搶救貓咪大作戰",
                 tags: ["網頁設計", "SDGs 目標 4", "2024"],
-                description: "路上經常有可愛的野貓，我們經常只顧著接觸，忘記貓咪的感受，希望透過對話框遊戲認識貓咪的習性，讓民眾在接觸貓咪時可以不被抓傷，在餵貓的時候不會餵錯食物、讓貓咪生病。<br><br><strong>遊戲機制與理念：</strong><br>這是一款認識貓咪習性的對話框互動遊戲，透過地圖場景互動帶動情節，讓玩家選擇對貓咪應有的互動。從錯誤中學習，遊戲最後會產生玩家是符合養貓條件的評估結果。<br><br>本作品符合 SDGs 目標 4「確保有教無類、公平以及高品質的教育，及提倡終身學習」，藉由互動式網頁教導使用者關於貓咪的正確知識。",
+                description: "路上經常有可愛的野貓，我們經常只顧著接觸，忘記貓咪的感受，希望透過對話框遊戲認識貓咪的習性，讓民眾在接觸貓咪時可以不被抓傷，在餵貓的時候不會餵錯食物、讓貓咪生病。<br><strong>本專案由團隊（徐曼玲、黃翊、林奕安、張庭毓、鄧鈺臻）合力完成。</strong><br><strong>遊戲機制與理念：</strong><br>這是一款認識貓咪習性的對話框互動遊戲，透過地圖場景互動帶動情節，讓玩家選擇對貓咪應有的互動。從錯誤中學習，遊戲最後會產生玩家是符合養貓條件的評估結果。<br><br>本作品符合 SDGs 目標 4「確保有教無類、公平以及高品質的教育，及提倡終身學習」，藉由互動式網頁教導使用者關於貓咪的正確知識。",
                 images: ["rgb_catweb.jpg"],
                 iframe: "https://yuzhen0619.github.io/catgame/" // ✨ 在這裡貼上您的 GitHub Pages 網址
             }
         };
 
-        // --- 點擊專案跳轉邏輯 (切換整頁內容) ---
+         // --- 點擊專案跳轉邏輯 (切換整頁內容) ---
         function openModal(projectId) {
             // 利用 Hash 來管理狀態，使返回鍵能正常運作
             window.location.hash = '#project-' + projectId;
@@ -590,6 +673,40 @@
 
         function goBack() {
             window.location.hash = lastCategory;
+        }
+
+        // 打開圖片放大視窗
+        function openImageViewer(src) {
+            const viewer = document.getElementById('image-viewer');
+            const viewerImg = document.getElementById('viewer-image');
+            
+            viewerImg.src = src;
+            viewer.classList.remove('hidden');
+            viewer.classList.add('flex');
+            
+            document.body.style.overflow = 'hidden'; // 防止背景滾動
+            
+            // 觸發動畫
+            requestAnimationFrame(() => {
+                viewer.classList.replace('opacity-0', 'opacity-100');
+                viewerImg.classList.replace('scale-95', 'scale-100');
+            });
+        }
+
+        // 關閉圖片放大視窗
+        function closeImageViewer() {
+            const viewer = document.getElementById('image-viewer');
+            const viewerImg = document.getElementById('viewer-image');
+            
+            viewer.classList.replace('opacity-100', 'opacity-0');
+            viewerImg.classList.replace('scale-100', 'scale-95');
+            
+            setTimeout(() => {
+                viewer.classList.add('hidden');
+                viewer.classList.remove('flex');
+                viewerImg.src = '';
+                document.body.style.overflow = ''; // 恢復滾動
+            }, 300);
         }
 
         function loadProjectDetail(projectId) {
@@ -602,10 +719,21 @@
             // 填充標題
             document.getElementById('detail-title').innerText = data.title;
             
-            // 填充標籤
-            const tagsHtml = data.tags.map(tag => 
+            // 填充標籤 (加入對 Instagram 的支援)
+            let tagsHtml = data.tags.map(tag => 
                 `<span class="px-4 py-1.5 bg-gray-200 dark:bg-white/10 text-gray-700 dark:text-gray-300 rounded-full font-medium shadow-sm">${tag}</span>`
             ).join('');
+            
+            // 如果專案有 Instagram 帳號，則新增一個專屬的點擊按鈕
+            if (data.instagram && !data.instagram.includes('請填寫')) {
+                tagsHtml += `
+                <button onclick="openIgModal('${data.instagramLink}')" class="px-4 py-1.5 bg-gradient-to-r from-purple-500 via-pink-500 to-orange-500 text-white rounded-full font-medium shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.062 3.252.127 4.79 1.636 4.931 4.892.05 1.288.062 1.668.062 4.883 0 3.215-.012 3.595-.062 4.883-.14 3.252-1.666 4.773-4.931 4.892-1.266.05-1.646.062-4.85-.062-3.204 0-3.584-.012-4.85-.062-3.26-.127-4.783-1.64-4.931-4.892-.05-1.288-.062-1.668-.062-4.883 0-3.215.012-3.595.062-4.883.149-3.256 1.66-4.773 4.931-4.892 1.266-.05 1.646-.062 4.85-.062zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.073-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    @${data.instagram}
+                </button>
+                `;
+            }
+            
             document.getElementById('detail-tags').innerHTML = tagsHtml;
             
             // 填充描述
@@ -617,14 +745,21 @@
                 let finalIframeUrl = data.iframe;
                 let isPlaceholder = finalIframeUrl.includes('您的') || finalIframeUrl.includes('替換') || finalIframeUrl.includes('請貼上');
 
-                // ✨ 智慧轉換：如果使用者貼上了原生的 Figma 分享網址，自動將其轉換為 Embed 網址！
-                // 這能完美解決 "www.figma.com 拒絕連線" 的問題
+                // ✨ 智慧轉換 Figma 網址
                 if (!isPlaceholder && finalIframeUrl.includes('figma.com') && !finalIframeUrl.includes('embed')) {
                     finalIframeUrl = `https://www.figma.com/embed?embed_host=share&url=${encodeURIComponent(finalIframeUrl)}`;
                 }
 
+                // ✨ 判斷是否為 Figma 或 遺憾交易所 (regret)
+                let isFigmaOrRegret = finalIframeUrl.includes('figma.com') || projectId === 'regret';
+                
+                // ✨ 根據判斷套用不同的 CSS class (Figma/遺憾交易所維持直式高度，其他改為 16:9 比例)
+                let containerClasses = isFigmaOrRegret 
+                    ? "w-full h-[600px] md:h-[800px]" 
+                    : "w-full aspect-video"; // 16:9 比例
+
                 detailIframeContainer.innerHTML = `
-                    <div class="w-full h-[600px] md:h-[800px] rounded-3xl overflow-hidden shadow-2xl border border-gray-200 dark:border-gray-800 bg-gray-100 dark:bg-gray-900 relative">
+                    <div class="${containerClasses} rounded-3xl overflow-hidden shadow-2xl border border-gray-200 dark:border-gray-800 bg-gray-100 dark:bg-gray-900 relative">
                         ${isPlaceholder ? '' : `<iframe src="${finalIframeUrl}" class="w-full h-full border-0" allowfullscreen></iframe>`}
                         
                         ${isPlaceholder ? `
@@ -633,11 +768,6 @@
                             <span class="text-gray-500 dark:text-gray-300 font-medium text-lg leading-relaxed">
                                 網頁內嵌等待替換中<br>
                                 <span class="text-sm font-mono text-blue-500 dark:text-blue-400 mt-2 block">${data.iframe}</span>
-                                <div class="text-sm text-gray-500 dark:text-gray-400 mt-4 text-left inline-block bg-white/80 dark:bg-black/50 p-4 rounded-xl">
-                                    💡 <b>小提示：</b><br>
-                                    1. Figma 網址請直接貼上「Share」連結，系統會自動轉換，不會再出現「拒絕連線」！<br>
-                                    2. <b>GitHub Pages</b> 請直接貼上完整網址 (包含 https://)。
-                                </div>
                             </span>
                         </div>
                         ` : ''}
@@ -701,16 +831,13 @@
                 detailVideoContainer.classList.add('hidden');
             }
 
-            // 填充圖片畫廊 (支援直接渲染真實圖片，並帶有防呆提示機制)
+            // 填充圖片畫廊 (點擊可放大)
             const galleryHtml = data.images.map((imgSrc, index) => {
                 return `
-                <div class="w-full h-96 md:h-[40rem] bg-gray-200/50 dark:bg-gray-900/80 rounded-3xl flex items-center justify-center border border-gray-200 dark:border-white/10 shadow-inner overflow-hidden relative group transition-all duration-300 hover:shadow-2xl">
-                    <div class="absolute inset-0 flex items-center justify-center bg-gray-900/10 dark:bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-20 pointer-events-none">
-                        <span class="text-gray-900 dark:text-gray-200 font-bold bg-white/80 dark:bg-black/80 px-6 py-3 rounded-full backdrop-blur-md shadow-lg">View Image</span>
-                    </div>
+                <div class="w-full h-96 md:h-[40rem] bg-gray-200/50 dark:bg-gray-900/80 rounded-3xl flex items-center justify-center border border-gray-200 dark:border-white/10 shadow-inner overflow-hidden relative transition-all duration-300 hover:shadow-2xl cursor-pointer group" onclick="openImageViewer('${imgSrc}')">
                     
-                    <!-- 真實圖片載入區塊 (object-contain 確保圖片完整顯示不被裁切) -->
-                    <img src="${imgSrc}" alt="${data.title} 圖片 ${index + 1}" class="w-full h-full object-contain relative z-10" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                    <!-- 真實圖片載入區塊 -->
+                    <img src="${imgSrc}" alt="${data.title} 圖片 ${index + 1}" class="w-full h-full object-contain relative z-10 transition-transform duration-500 group-hover:scale-[1.02]" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                     
                     <!-- 若圖片未替換或載入失敗，顯示的佔位提示框 -->
                     <div class="hidden absolute inset-0 flex-col items-center justify-center p-6 text-center z-0">
@@ -724,6 +851,53 @@
                 `;
             }).join('');
             document.getElementById('detail-gallery').innerHTML = galleryHtml;
+        }
+
+        // --- IG 彈出視窗控制邏輯 ---
+        const igModal = document.getElementById('ig-modal');
+        const igModalContent = document.getElementById('ig-modal-content');
+        const igIframeContainer = document.getElementById('ig-iframe-container');
+
+        function openIgModal(link) {
+            // 確保網址存在且不是預設的防呆文字
+            if (!link || link.includes('請貼上')) {
+                alert('請先在程式碼中替換真實的 Instagram 網址！');
+                return;
+            }
+
+            // 處理 IG 內嵌網址邏輯 (將一般網址轉為 embed 格式)
+            let embedUrl = link;
+            if (!link.includes('embed')) {
+                // 如果結尾有斜線先去掉，然後加上 /embed
+                embedUrl = link.replace(/\/$/, '') + '/embed';
+            }
+
+            igIframeContainer.innerHTML = `<iframe src="${embedUrl}" class="w-full h-full border-0" allowtransparency="true" allowfullscreen="true" frameborder="0" scrolling="no"></iframe>`;
+            
+            // 顯示視窗並鎖定背景滾動
+            igModal.classList.remove('hidden');
+            igModal.classList.add('flex');
+            document.body.style.overflow = 'hidden';
+
+            // 觸發視窗彈出動畫
+            setTimeout(() => {
+                igModalContent.classList.remove('opacity-0', 'scale-95');
+                igModalContent.classList.add('opacity-100', 'scale-100');
+            }, 10);
+        }
+
+        function closeIgModal() {
+            // 觸發視窗關閉動畫
+            igModalContent.classList.remove('opacity-100', 'scale-100');
+            igModalContent.classList.add('opacity-0', 'scale-95');
+            
+            // 等待動畫結束後隱藏並清除內容
+            setTimeout(() => {
+                igModal.classList.remove('flex');
+                igModal.classList.add('hidden');
+                document.body.style.overflow = '';
+                igIframeContainer.innerHTML = ''; // 清除 iframe 節省資源
+            }, 300);
         }
 
         // --- 深淺色模式切換邏輯 ---
